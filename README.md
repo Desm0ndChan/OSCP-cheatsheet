@@ -885,6 +885,12 @@ ssh -Nf -R 127.0.0.1:ANY_UNUSED_PORT:REMOTE_TARGET:TARGET_PORT kali@KALI_IP
 ssh -Nf -R Kali_proxy_port(1080) kali@KALI_IP
 ```
 
+#### 8. When need to access a host via proxy
+```bash
+# Make sure you have your proxy running correctly
+proxychains4 -q YOUR_COMMAND
+```
+
 ## 7. Misc
 Things that are important concept or PoC techniques but don't related the above categories/are generic 
 

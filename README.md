@@ -339,7 +339,7 @@ curl -H "User-Agent: () { :; }; PAYLOAD" http://192.168.57.22/cgi-bin/cgi-script
 
 ### drupal
 ``` bash
-droopescan scan -U IP
+droopescan scan -u IP
 # initial shell(limited function) 
 # https://github.com/dreadlocked/Drupalgeddon2 
 # only command execution 

@@ -246,6 +246,12 @@ searchsploit -m php/webapps/50226.py
 
 ### Common Web App vuln
 If cannot locate a public exploit, you may need other means for getting the initial foothold.
+### Arbitrary File Upload
+If the site has a file upload function, and you know where is the 
+upload directory (maybe in /uploads).
+
+Locate your payload in /usr/share/webshells/, upload the corresponding script file.
+Then navigate to http://IP/uploads/webshell.php. `webshell.php` is just an example, you need to navigate to the corresponding uploaded file.
 
 ### Insecure deserialization
 

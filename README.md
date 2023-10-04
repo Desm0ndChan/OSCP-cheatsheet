@@ -252,6 +252,8 @@ upload directory (maybe in /uploads).
 
 Locate your payload in /usr/share/webshells/, upload the corresponding script file.
 Then navigate to http://IP/uploads/webshell.php. `webshell.php` is just an example, you need to navigate to the corresponding uploaded file.
+If you are using payload like simple-backdoor.php, which does not do automatic payload execution and wait for user input
+, you will need to navigate to http://IP/uploads/simple-backdoor.php then append `?cmd=PAYLOAD` or the payload will be received as post form data.
 
 ### Insecure deserialization
 

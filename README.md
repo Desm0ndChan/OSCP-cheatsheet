@@ -726,7 +726,7 @@ sc config SERVICE binPath= "cmd.exe /c powershell.exe -enc BASE64_PAYLOAD"
 
 [God Potato](https://github.com/BeichenDream/GodPotato)
 
-[Sweet Potato](https://github.com/CCob/SweetPotato)
+[Sweet Potato](https://github.com/uknowsec/SweetPotato/blob/master/README.md)
 ```
 # Juicy Potato
 # remember to specify /c since we are passing in arguments to cmd.exe

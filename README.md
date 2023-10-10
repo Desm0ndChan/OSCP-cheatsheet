@@ -606,6 +606,11 @@ openssl passwd 123
 #append the new user to /etc/passwd in such format 
 echo "Fakeuser:${HASH}:0:0:root:/root:/bin/bash" >> /etc/passwd
 ```
+### Modifiable service script exploit
+If a service script (.service file or the script used in `ExecStart`) is writable,
+you can replace the `ExecStart` part with your PE payload.
+Or replace the content of the script which called by the `ExecStart`.
+The payload and methodology can be any of the general priv esc tehcniques
 
 ### Library Hijack
 [Python lib hijack](https://rastating.github.io/privilege-escalation-via-python-library-hijacking/)

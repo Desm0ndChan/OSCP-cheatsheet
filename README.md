@@ -967,6 +967,8 @@ There are multiple ways to do so:
     echo "pwn3d" > /tmp/pwn
     ```
     A valid respond should be a new file is created at /tmp named pwn. 
+    Also check the file permission and ownership with `ls -la` to see if 
+    the file is owned the by process owner
 
 ### Starting a windows conptyshell in background (can use it via a web shell to call conptyshell directly)
 ```cmd
@@ -1064,7 +1066,7 @@ For windows, use this [tool](https://github.com/antonioCoco/ConPtyShell)
 
 ### When you feel stuck
 * Do not rely on autorecon only
-* modify the explot script directory path
+* modify the explot script directory path/uri
 * List user directories recursively
 * check hashes, password reuse
 * Try rdp,ssh,winrm with owned creds
@@ -1073,9 +1075,10 @@ For windows, use this [tool](https://github.com/antonioCoco/ConPtyShell)
 * Check C:\windows\system32\config for SAM and SYSTEM if theres a old version of C:\
 * Go for kernel exploit
 * Try local auth as admin
-* try pivoting first
+* try pivoting/look for internal running application
 * Try find vhost
 * search about that specific service/service in google but add the keyword "hack the box"
+* If a con pty shell does not work for you, try a simple shell/tty shell
 
 ### Some other useful cheatsheets or website
 * [Windows version GTFOBins](https://lolbas-project.github.io/)

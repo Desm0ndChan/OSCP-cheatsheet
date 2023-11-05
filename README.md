@@ -44,6 +44,7 @@ wpscan --url http://IP/wordpress/ -U users.txt -P /usr/share/wordlists/rockyou.t
 ```bash
 # basic auth login
 hydra -C WORDLIST -s PORT IP http-get URI 
+# Use -L/-P for wordlist -l/-p for single username/password
 #ssh
 hydra -L user -P pass ssh://IP -s 22
 # http post login

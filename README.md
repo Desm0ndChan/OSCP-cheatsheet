@@ -916,6 +916,21 @@ ssh -Nf -R Kali_proxy_port(1080) kali@KALI_IP
 proxychains4 -q YOUR_COMMAND
 ```
 
+#### SSH control sequence
+The SSH control sequence allows you to 
+change SSH options after eastablished the connection. 
+It is useful if you want to add new port forwarding options in current SSH session.
+See this [blog](https://www.sans.org/blog/using-the-ssh-konami-code-ssh-control-sequences/) for details
+```bash
+# execute in a terminal
+# make sure you pressed enter for a new line
+# then press ~C, it won't be shown in the terminal but you should see
+ssh >
+# Then type in your options, e.g. adding a new SOCKS proxy
+ssh > -D 1337
+# Then press enter again to add the option
+```
+
 ## 7. Misc
 Things that are important concept or PoC techniques but don't related the above categories/are generic 
 

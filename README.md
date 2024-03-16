@@ -183,17 +183,20 @@ ffuf -u http://${IP}/LFI.php?file=FUZZ -w log.txt -fr "Failed opening" -o fuzz.t
 
 ## Enumeration notes
 
-### General thing
+### General things
 
 * if you have only a username, let say john, 
- try the creds pair as john:john. This applies to all services
+ try the username as pass creds pair, john:john. This applies to all services
 
 * if you see a web running a CMS/platform,
  try the default creds pair or simple things like admin:admin or admin:password.
  
-* always try to start with simplest approach
+* always try to start with simplest approach,
+  do not over-complicated things
+ 
 * if there is a file in ftp, smb or whatever share services.
 Download it and check the content. If there is a list of passwords, save it to a file, enumerate for usernames then perform bruteforce attack. 
+Also, using tools such as exiftool to check file attributes, e.g, authors, to enumerate potential usernames.
 
 ### FTP
 ``` bash

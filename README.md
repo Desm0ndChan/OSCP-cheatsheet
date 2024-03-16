@@ -114,7 +114,7 @@ smbmap -H IP -R SHARES -A PATTEN --depth 6 -q
 ### cme (critical for AD)
 ``` bash
 # Use quotes for -p if your password has a speicial character
-# proxychains4 is optional depends whether you are 
+# proxychains4 is optional depends whether you are working against an internal network
 # put USER as '' and PASS as '' for null session check
 # Check pass pol before bruteforcing to avoid lockout
 cme smb IP -u USER -p PASS --pass-pol

@@ -5,12 +5,52 @@
 * Practice taking screenshot while you hack
 * Get a document file ready to paste your walkthrough screenshots
 
-## 1. Recon
+## 1. Recon/Enumeration
 
-Recon is an essential OSCP skill set. 
+Recon/Enumeration is an essential OSCP skill. 
 If you do have good recon skills, it makes the exam much easier.
 The tools included in this cheat sheet might not be enough. 
 The content is created based on my own revision
+
+## Enumeration notes
+
+### General things
+
+* if you have only a username, let say john, 
+ try the username as pass creds pair, john:john. This applies to all services
+
+* if you see a web running a CMS/platform,
+ try the default creds pair or simple things like admin:admin or admin:password.
+ 
+* always try to start with simplest approach,
+  do not over-complicated things
+ 
+* if there is a file in ftp, smb or whatever share services.
+Download it and check the content. If there is a list of passwords, save it to a file, enumerate for usernames then perform bruteforce attack. 
+Also, using tools such as exiftool to check file attributes, e.g, authors, to enumerate potential usernames.
+
+* Do not only rely on one tool, different tools may possibly provide different results
+
+* Aggregate IMPORTANT enumerated info into a notes from the start so that you can reproduce the attack fast for the report,
+also avoid looking and searching the actual long and detailed recon result which can make you exhausted,
+important means useful ports, harvested creds, PoC commands, etc.
+
+### FTP
+``` bash
+# Check if path traversal enabled
+# switch to binary if you are transferring binaries
+ftp > binary
+binary set to I 
+```
+
+### WEB
+* use wget when you are downloading a file, it won't alter the modification time of the file. 
+
+* Always view the page source code, critical info may hide in the page in form of comment 
+  
+* If the server redirect you to another hostname and it said not found, it is likely to be a vhost issue. Try `curl -v URL` see if the status code is redirection. If so, add the entry `IP DOMAIN_NAME` to /etc/hosts  
+
+* See if CHANGELOG, robots.txt, sitemap or README file exist
 
 ## Tool
 ### nmap
@@ -182,37 +222,6 @@ ffuf -w /path/to/wordlist -u https://target  -H 'Host: FUZZ.TARGET.DOMAIN'
 cat /usr/share/SecLists/Fuzzing/LFI/LFI-gracefulsecurity-linux.txt | grep log > log.txt 
 ffuf -u http://${IP}/LFI.php?file=FUZZ -w log.txt -fr "Failed opening" -o fuzz.txt 
 ```
-
-## Enumeration notes
-
-### General things
-
-* if you have only a username, let say john, 
- try the username as pass creds pair, john:john. This applies to all services
-
-* if you see a web running a CMS/platform,
- try the default creds pair or simple things like admin:admin or admin:password.
- 
-* always try to start with simplest approach,
-  do not over-complicated things
- 
-* if there is a file in ftp, smb or whatever share services.
-Download it and check the content. If there is a list of passwords, save it to a file, enumerate for usernames then perform bruteforce attack. 
-Also, using tools such as exiftool to check file attributes, e.g, authors, to enumerate potential usernames.
-
-### FTP
-``` bash
-# Check if path traversal enabled
-# switch to binary if you are transferring binaries
-ftp > binary
-binary set to I 
-```
-
-### WEB
-* use wget when you are downloading a file, it won't alter the modification time of the file. 
-* Always view the source code
-* If the server redirect you to another hostname and it said not found, it is likely to be a vhost issue. Try `curl -v URL` see if the status code is redirection. If so, add the entry `IP DOMAIN_NAME` to /etc/hosts  
-* See if CHANGELOG, robots.txt, sitemap or README file exist
 
 ## 2. Initial Access
 This is the way of getting foothold as a low privileged user on the server.

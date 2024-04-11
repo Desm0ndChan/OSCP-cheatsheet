@@ -32,7 +32,7 @@ Also, using tools such as exiftool to check file attributes, e.g, authors, to en
 * Do not only rely on one tool, different tools may possibly provide different results
 
 * Aggregate IMPORTANT enumerated info into a notes from the start so that you can reproduce the attack fast for the report,
-also avoid looking and searching the actual long and detailed recon result which can make you exhausted,
+also avoid looking and searching the actual long and detailed recon result again and again which can make you exhausted,
 important means useful ports, harvested creds, PoC commands, etc.
 
 ### FTP

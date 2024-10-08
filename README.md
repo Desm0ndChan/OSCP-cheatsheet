@@ -1229,6 +1229,8 @@ For windows, use this [tool](https://github.com/antonioCoco/ConPtyShell)
 * Try find vhost
 * search about that specific service/service in google but add the keyword "hack the box"
 * If a con pty shell does not work for you, try a simple shell/tty shell
+* If you need extra tools (like a specific compiler/file viewer), usually it will be either in your Kali or the exam machine.
+    Try to look for online solution if you can't find any.
 
 ### Some other useful cheatsheets or website
 * [Windows version GTFOBins](https://lolbas-project.github.io/)

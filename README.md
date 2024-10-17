@@ -142,6 +142,10 @@ smbclient \\\\IP\\ -L -N
 smbclient \\\\IP\\ -L -N -I IP
 # use the similar command option to login to the share
 smbclient \\\\IP\\SHARE -N -I IP
+# If -N does not work at all, sometimes you may try guess or anonymous as username with blank password
+smbclient \\\\IP\\ -L -U anonymous -P '' -I IP
+smbclient \\\\IP\\SHARE -U anonymous -P '' -I IP
+
 ```
 
 ### SMBmap
